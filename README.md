@@ -29,7 +29,46 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## How this was created
+## Design system integration
+In order to include the design system into the Vue application a few changes to
+the Webpack configuration were required.
+
+Basic integration was actually quite simple and only required that the
+`<style src="../node_modules/shop-patternpack/dist/pattern-library/assets/css/patterns.css"></style>`
+tag be added to the `App.vue`.  Referring to the entire `node_modules` path was
+cumbersome so a Webpack alias was created to simplify things.
+
+
+Adding an alias to the the webpack configuration makes accessing the assets much
+simpler.  To include the styles change the path to use the alias `patternpack`
+instead of the long `node_modules/...` path.
+`/build/webpack.base.conf.js`
+```js
+resolve: {
+  extensions: ['.js', '.vue', '.json'],
+  alias: {
+    'vue$': 'vue/dist/vue.esm.js',
+    '@': resolve('src'),
+    'patternpack': resolve('node_modules/shop-patternpack/dist/pattern-library/assets')
+  }
+}
+```
+
+`App.vue`
+```html
+<style src="patternpack/css/patterns.css"></style>
+```
+
+ > ##### CAUTION
+The alias can also be used to access image assets, however [there is a trick to
+getting it working](https://github.com/vuejs/vue-loader/issues/193).  The path
+must be prefixed with a `~` so that the `vue-html-loader` will treat the path
+like a module path (instead of a relative path).
+```html
+<img src="~patternpack/images/icon-remove.svg" />Icon
+```
+
+## Bootstrapping a new application
 ```bash
 npm init
 npm install -g vue-cli

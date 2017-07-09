@@ -1,3 +1,5 @@
+<style src="patternpack/css/patterns.css"></style>
+
 <template>
   <div id="app">
     <router-view></router-view>
