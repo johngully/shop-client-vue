@@ -1,15 +1,42 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ProductsList from '@/components/ProductsList'
+import { sync } from 'vuex-router-sync'
+import store from '@/store'
+import Products from '@/components/products'
+import Product from '@/components/product'
+import Checkout from '@/components/checkout'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'ProductsList',
-      component: ProductsList
+      name: 'Products',
+      component: Products,
+      beforeEnter: function (to, from, next) {
+        store.dispatch('loadProducts')
+        next()
+      }
+    },
+    {
+      path: '/product/:id',
+      name: 'Product',
+      component: Product,
+      beforeEnter: function (to, from, next) {
+        return store.dispatch('loadProduct', to.params.id).then(() => {
+          next()
+        })
+      }
+    },
+    {
+      path: '/checkout',
+      name: 'Checkout',
+      component: Checkout
     }
   ]
 })
+
+sync(store, router)
+export default router

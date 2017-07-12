@@ -1,0 +1,26 @@
+{
+  "color": [
+    "Black",
+    "Blue",
+    "Brown",
+    "Crystal",
+    "Gold",
+    "Silver",
+    "Two-tone"
+  ],
+  "fit": [
+    "Narrow",
+    "Medium",
+    "Wide"
+  ],
+  "material": [
+    "Acetate",
+    "Metal",
+    "Mixed material"
+  ],
+  "shape": [
+    "Round",
+    "Rectangle",
+    "Square"
+  ]
+}
