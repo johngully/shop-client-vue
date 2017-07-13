@@ -2,7 +2,6 @@
   <div class="checkout">
     <app-header></app-header>
     <checkout-summary :cartAmount="cartAmount" :cartCount="cartCount" @checkout="checkout"></checkout-summary>
-    <button @click="removeProductFromCart(cart[0])">Remove</button>
     <checkout-cart-list :cart="cart" :cartAmount="cartAmount" @removeProductFromCart="removeProductFromCart"></checkout-cart-list>
     <checkout-continue-shopping :cartCount="cartCount"></checkout-continue-shopping>
     <app-footer></app-footer>
