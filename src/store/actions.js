@@ -1,25 +1,18 @@
-import productsData from '@/assets/products.json'
+import productsService from '@/services/productsService'
 
 export default {
   loadProducts: function ({ commit }) {
     console.debug('ACTION:', 'loadProducts')
-    // TODO: load from API
-    const products = productsData
-    return commit('loadProductsSuccess', products)
-
-    // TODO: handle error condition from api
-    // commit('loadProductsError')
+    return productsService.getProducts()
+      .then(products => commit('loadProductsSuccess', products))
+      .catch(error => commit('loadProductsError', error))
   },
 
-  loadProduct: function ({ commit, dispatch, state }, product) {
-    console.debug('ACTION', 'loadProduct', product)
-    // This ensure that the initial set of products has been loaded
-    // Probably not needed once an API call is implemented
-    if (!state.products.length) {
-      return dispatch('loadProducts').then(() => commit('loadProduct', product))
-    } else {
-      return commit('loadProduct', product)
-    }
+  loadProduct: function ({ commit, dispatch, state }, id) {
+    console.debug('ACTION', 'loadProduct', id)
+    return productsService.getProduct(id)
+      .then(product => commit('loadProduct', product))
+      .catch(error => commit('loadProductError', error))
   },
 
   addProductToCart: function ({ commit }, product) {

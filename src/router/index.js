@@ -16,8 +16,11 @@ const router = new Router({
       name: 'Products',
       component: Products,
       beforeEnter: function (to, from, next) {
-        store.dispatch('loadProducts')
-        next()
+        if (store.state.products.length) {
+          return next()
+        } else {
+          return store.dispatch('loadProducts').then(() => next())
+        }
       }
     },
     {
@@ -25,9 +28,7 @@ const router = new Router({
       name: 'Product',
       component: Product,
       beforeEnter: function (to, from, next) {
-        return store.dispatch('loadProduct', to.params.id).then(() => {
-          next()
-        })
+        return store.dispatch('loadProduct', to.params.id).then(() => next())
       }
     },
     {

@@ -14,6 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "lodash.clonedeep": "^4.5.0",
     "shop-patternpack": "github:johngully/shop-design-system-patternpack",
     "vue": "^2.3.3",

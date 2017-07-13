@@ -35,13 +35,12 @@ export default {
     state.filteredProducts = products
   },
 
-  loadProductsError: function () {
-    console.error('MUTATION:', 'loadProductsError')
+  loadProductsError: function (error) {
+    console.error('MUTATION:', 'loadProductsError', error)
   },
 
-  loadProduct: function (state, id) {
-    console.debug('MUTATION:', 'loadProduct', id)
-    const product = state.products.find(item => item.id === id)
+  loadProduct: function (state, product) {
+    console.debug('MUTATION:', 'loadProduct', product)
     state.product = product
   },
 
