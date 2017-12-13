@@ -7,7 +7,7 @@
     </ul>
     <div class="filters__options" v-for="(options, category) in filters" v-show="category === selectedCategory">
       <div class="filters__option" v-for="option in options">
-        <label><input type="checkbox" :id="option" :value="option" v-model="selectedOptions[selectedCategory]" @change="filter">{{ option }}</label>
+        <label><input type="checkbox" :id="option" :value="option" v-model="selectedOptions[selectedCategory]" @change="filter" />{{ option }}</label>
       </div>
     </div>
   </section>
