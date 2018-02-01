@@ -1,0 +1,24 @@
+import gql from 'graphql-tag'
+
+const productFragment = gql`
+  fragment ProductFragment on Product {
+    id,
+    details {
+      name
+      description
+    },
+    pricing {
+      amount
+    },
+    attributes {
+      color
+      fit
+      material
+      measurements
+      shape
+    },
+    images
+  }
+`
+
+export default productFragment

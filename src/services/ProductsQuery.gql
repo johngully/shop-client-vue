@@ -1,0 +1,13 @@
+import gql from 'graphql-tag'
+import ProductFragment from './ProductFragment.gql'
+
+const productsQuery = gql`
+  query getProducts {
+    products {
+      ...ProductFragment
+    }
+  }
+  ${ProductFragment}
+`
+
+export default productsQuery
